@@ -44,7 +44,6 @@
             --shadow: rgba(0,0,0,0.1);
         }
 
-        /* レイアウト */
         .app {
             max-width: 1200px;
             margin: 0 auto;
@@ -122,7 +121,6 @@
             font-weight: bold;
         }
 
-        /* カルーセル (スワイプで左右移動) */
         .carousel-container {
             position: relative;
             margin: 1rem 0;
@@ -144,7 +142,6 @@
             gap: 1.5rem;
             padding: 0.5rem;
         }
-        /* 6個ずつ2列以上に調整 */
         @media (min-width: 768px) {
             .carousel-slide {
                 grid-template-columns: repeat(3, 1fr);
@@ -204,7 +201,6 @@
             border-radius: 5px;
         }
 
-        /* 詳細ページのスタイル */
         .detail-page {
             background: var(--bg);
             border-radius: 2rem;
@@ -272,42 +268,35 @@
                 <button data-lang="en" class="lang-btn active-lang">🇬🇧 EN</button>
                 <button data-lang="zh" class="lang-btn">🇨🇳 中文</button>
                 <button data-lang="th" class="lang-btn">🇹🇭 ไทย</button>
+                <button data-lang="ja" class="lang-btn">🇯🇵 日本語</button>
             </div>
         </div>
     </header>
 
-    <!-- スポンサー枠 (上部) -->
     <div id="sponsorTop" class="sponsor">
-        <!-- 後で画像URLとリンク先を変更してください -->
         <img id="sponsorTopImg" class="sponsor-img" src="https://picsum.photos/id/20/120/60" alt="Sponsor">
         <a id="sponsorTopLink" href="#" target="_blank" class="sponsor-btn">Visit Site</a>
     </div>
 
-    <!-- メインコンテンツ (カルーセル) -->
     <div id="mainView">
         <div class="carousel-container">
             <div class="carousel-wrapper" id="carouselWrapper">
-                <!-- スライド1 (6アイテム) -->
                 <div class="carousel-slide" id="slide1"></div>
-                <!-- スライド2 (6アイテム) -->
                 <div class="carousel-slide" id="slide2"></div>
             </div>
             <div class="carousel-nav" id="carouselNav"></div>
         </div>
     </div>
 
-    <!-- スポンサー枠 (下部) -->
     <div id="sponsorBottom" class="sponsor">
         <img id="sponsorBottomImg" class="sponsor-img" src="https://picsum.photos/id/26/120/60" alt="Sponsor">
         <a id="sponsorBottomLink" href="#" target="_blank" class="sponsor-btn">Visit Site</a>
     </div>
 
-    <!-- Google マップ (バンコク中心) -->
     <div class="map-frame">
         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d198413.21010103857!2d100.49319470273437!3d13.7367173177169!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30e29f2d386c6c8f%3A0x6c49b9d4b5f7b9a4!2z4Lia4Li44LiH4LmA4LiX4Lia4Liy4Lia4Liy4Lil4Liy4LiB4LmA4LiU4Lix4LiZ4LmM4Lio4Liy4LiZ4LiB4Liy4Lij4LmM4Lir4Liy4LiZ4LiY4LmJ4Liy!5e0!3m2!1sen!2sth!4v1650000000000!5m2!1sen!2sth" allowfullscreen loading="lazy"></iframe>
     </div>
 
-    <!-- 詳細ページ (初期非表示) -->
     <div id="detailView" class="hidden"></div>
 
     <footer>
@@ -316,7 +305,7 @@
 </div>
 
 <script>
-    // ======================= 多言語データ =======================
+    // ======================= 多言語データ (日本語追加) =======================
     const translations = {
         en: {
             title: "✨ Thailand Travel Guide",
@@ -325,8 +314,7 @@
             officialSite: "Official Website",
             transportLabel: "🚆 How to get there",
             stationLabel: "📍 Nearest station / transport",
-            attractionLabel: "⭐ Highlights",
-            defaultImgAlt: "Attraction image"
+            attractionLabel: "⭐ Highlights"
         },
         zh: {
             title: "✨ 泰国旅游指南",
@@ -335,8 +323,7 @@
             officialSite: "官方网站",
             transportLabel: "🚆 交通方式",
             stationLabel: "📍 最近的车站/交通",
-            attractionLabel: "⭐ 亮点",
-            defaultImgAlt: "景点图片"
+            attractionLabel: "⭐ 亮点"
         },
         th: {
             title: "✨ คู่มือท่องเที่ยวไทย",
@@ -345,86 +332,95 @@
             officialSite: "เว็บไซต์ทางการ",
             transportLabel: "🚆 วิธีการเดินทาง",
             stationLabel: "📍 สถานีใกล้เคียง",
-            attractionLabel: "⭐ จุดเด่น",
-            defaultImgAlt: "รูปภาพสถานที่"
+            attractionLabel: "⭐ จุดเด่น"
+        },
+        ja: {
+            title: "✨ タイ旅行ガイド",
+            sponsorBtn: "公式サイトへ",
+            backBtn: "← 一覧に戻る",
+            officialSite: "公式ウェブサイト",
+            transportLabel: "🚆 アクセス方法",
+            stationLabel: "📍 最寄り駅 / 交通",
+            attractionLabel: "⭐ 見どころ"
         }
     };
 
-    // 12個の観光スポットデータ (各言語対応)
+    // 12個の観光スポット (日本語説明追加)
     const places = [
         { id: 0, img: "https://picsum.photos/id/104/400/300", 
-          title: { en: "Wat Phra Kaew (Emerald Buddha)", zh: "玉佛寺", th: "วัดพระแก้ว" },
-          shortDesc: { en: "The most sacred temple in Thailand.", zh: "泰国最神圣的寺庙。", th: "วัดที่ศักดิ์สิทธิ์ที่สุดของไทย" },
+          title: { en: "Wat Phra Kaew (Emerald Buddha)", zh: "玉佛寺", th: "วัดพระแก้ว", ja: "ワット・プラケオ（エメラルド仏）" },
+          shortDesc: { en: "The most sacred temple in Thailand.", zh: "泰国最神圣的寺庙。", th: "วัดที่ศักดิ์สิทธิ์ที่สุดของไทย", ja: "タイで最も神聖な寺院" },
           detail: { en: "Located within Grand Palace complex. Nearest station: Sanam Chai MRT or take taxi. Dress code strictly enforced.", 
                     zh: "位于大皇宫内。最近地铁：Sanam Chai站或打车。注意着装。", 
-                    th: "ตั้งอยู่ในเขตพระราชวังใหญ่ รถไฟฟ้า MRT สนามไชย ต้องแต่งกายสุภาพ" },
-          station: { en: "MRT Sanam Chai + walk 10 min", zh: "MRT Sanam Chai站 步行10分钟", th: "MRT สนามไชย เดิน 10 นาที" },
+                    th: "ตั้งอยู่ในเขตพระราชวังใหญ่ รถไฟฟ้า MRT สนามไชย ต้องแต่งกายสุภาพ",
+                    ja: "大宮殿の敷地内にあります。最寄り駅：MRTサナームチャイ駅またはタクシー。服装規定あり。" },
+          station: { en: "MRT Sanam Chai + walk 10 min", zh: "MRT Sanam Chai站 步行10分钟", th: "MRT สนามไชย เดิน 10 นาที", ja: "MRTサナームチャイ駅 徒歩10分" },
           url: "https://www.royalgrandpalace.th/" },
         { id: 1, img: "https://picsum.photos/id/106/400/300",
-          title: { en: "Wat Pho (Reclining Buddha)", zh: "卧佛寺", th: "วัดโพธิ์" },
-          shortDesc: { en: "Giant reclining Buddha & massage school.", zh: "巨大卧佛和泰式按摩发源地。", th: "พระนอนขนาดใหญ่และโรงเรียนนวดแผนไทย" },
-          detail: { en: "Nearest: MRT Sanam Chai or ferry to Tha Tien. Famous for Thai massage.", zh: "最近MRT Sanam Chai或搭船至Tha Tien。泰式按摩著名。", th: "MRT สนามไชย หรือเรือถึงท่าเตียน" },
-          station: { en: "MRT Sanam Chai / Ferry", zh: "MRT Sanam Chai / 渡轮", th: "MRT สนามไชย / เรือ" },
+          title: { en: "Wat Pho (Reclining Buddha)", zh: "卧佛寺", th: "วัดโพธิ์", ja: "ワット・ポー（涅槃仏）" },
+          shortDesc: { en: "Giant reclining Buddha & massage school.", zh: "巨大卧佛和泰式按摩发源地。", th: "พระนอนขนาดใหญ่และโรงเรียนนวดแผนไทย", ja: "巨大な涅槃仏とタイ古式マッサージ発祥の地" },
+          detail: { en: "Nearest: MRT Sanam Chai or ferry to Tha Tien. Famous for Thai massage.", zh: "最近MRT Sanam Chai或搭船至Tha Tien。泰式按摩著名。", th: "MRT สนามไชย หรือเรือถึงท่าเตียน", ja: "最寄り：MRTサナームチャイ駅またはTha Tienまでフェリー。タイ古式マッサージで有名。" },
+          station: { en: "MRT Sanam Chai / Ferry", zh: "MRT Sanam Chai站 / 渡轮", th: "MRT สนามไชย / เรือ", ja: "MRTサナームチャイ駅 / フェリー" },
           url: "https://www.watpho.com/" },
         { id: 2, img: "https://picsum.photos/id/96/400/300",
-          title: { en: "Chatuchak Market", zh: "乍都乍周末市场", th: "ตลาดนัดจตุจักร" },
-          shortDesc: { en: "Weekend mega market, 15,000+ stalls.", zh: "周末巨型市场，超过15000个摊位。", th: "ตลาดนัดสุดสัปดาห์ 15,000+ ร้าน" },
-          detail: { en: "BTS Mo Chit / MRT Chatuchak Park. Only Sat-Sun. Best for shopping & street food.", zh: "BTS Mo Chit站或MRT Chatuchak Park站。仅周末开放。", th: "BTS หมอชิต / MRT สวนจตุจักร เปิดเสาร์-อาทิตย์" },
-          station: { en: "BTS Mo Chit / MRT Chatuchak Park", zh: "BTS Mo Chit站 / MRT Chatuchak Park站", th: "BTS หมอชิต / MRT สวนจตุจักร" },
+          title: { en: "Chatuchak Market", zh: "乍都乍周末市场", th: "ตลาดนัดจตุจักร", ja: "チャトゥチャック市場" },
+          shortDesc: { en: "Weekend mega market, 15,000+ stalls.", zh: "周末巨型市场，超过15000个摊位。", th: "ตลาดนัดสุดสัปดาห์ 15,000+ ร้าน", ja: "週末限定の巨大マーケット、15,000店以上" },
+          detail: { en: "BTS Mo Chit / MRT Chatuchak Park. Only Sat-Sun. Best for shopping & street food.", zh: "BTS Mo Chit站或MRT Chatuchak Park站。仅周末开放。", th: "BTS หมอชิต / MRT สวนจตุจักร เปิดเสาร์-อาทิตย์", ja: "BTSモーチット駅 / MRTチャトゥチャックパーク駅。土曜・日曜のみ。ショッピングと屋台に最適。" },
+          station: { en: "BTS Mo Chit / MRT Chatuchak Park", zh: "BTS Mo Chit站 / MRT Chatuchak Park站", th: "BTS หมอชิต / MRT สวนจตุจักร", ja: "BTSモーチット駅 / MRTチャトゥチャックパーク駅" },
           url: "https://www.chatuchakmarket.org/" },
         { id: 3, img: "https://picsum.photos/id/30/400/300",
-          title: { en: "Ayutthaya Historical Park", zh: "大城历史公园", th: "อุทยานประวัติศาสตร์อยุธยา" },
-          shortDesc: { en: "UNESCO ancient capital ruins.", zh: "联合国教科文组织古迹。", th: "ซากปรักหักพังเมืองหลวงเก่า มรดกโลก" },
-          detail: { en: "Take train from Bangkok (1.5h). Rent bicycle to explore temples like Wat Mahathat.", zh: "从曼谷乘火车约1.5小时。租自行车游览玛哈泰寺等。", th: "รถไฟจากกรุงเทพฯ 1.5 ชม. ปั่นจักรยานชมวัด" },
-          station: { en: "Ayutthaya Railway Station", zh: "大城火车站", th: "สถานีรถไฟอยุธยา" },
+          title: { en: "Ayutthaya Historical Park", zh: "大城历史公园", th: "อุทยานประวัติศาสตร์อยุธยา", ja: "アユタヤ歴史公園" },
+          shortDesc: { en: "UNESCO ancient capital ruins.", zh: "联合国教科文组织古迹。", th: "ซากปรักหักพังเมืองหลวงเก่า มรดกโลก", ja: "ユネスコ世界遺産の古代遺跡" },
+          detail: { en: "Take train from Bangkok (1.5h). Rent bicycle to explore temples like Wat Mahathat.", zh: "从曼谷乘火车约1.5小时。租自行车游览玛哈泰寺等。", th: "รถไฟจากกรุงเทพฯ 1.5 ชม. ปั่นจักรยานชมวัด", ja: "バンコクから電車で約1.5時間。自転車を借りてワット・マハタートなどの寺院を巡る。" },
+          station: { en: "Ayutthaya Railway Station", zh: "大城火车站", th: "สถานีรถไฟอยุธยา", ja: "アユタヤ駅" },
           url: "https://www.ayutthaya-history.com/" },
         { id: 4, img: "https://picsum.photos/id/152/400/300",
-          title: { en: "Chiang Mai Old City", zh: "清迈古城", th: "เมืองเก่าเชียงใหม่" },
-          shortDesc: { en: "Ancient walls, temples & night bazaar.", zh: "古城墙、寺庙和夜市。", th: "กำแพงเมืองเก่า วัด และตลาดกลางคืน" },
-          detail: { en: "Fly to Chiang Mai from BKK. Songthaews (red trucks) are common. Visit Wat Phra Singh.", zh: "从曼谷飞清迈。红色双条车常见。推荐帕辛寺。", th: "บินจากกรุงเทพฯ รถสองแถวแดง วัดพระสิงห์" },
-          station: { en: "Chiang Mai Airport + city songthaew", zh: "清迈机场+双条车", th: "สนามบินเชียงใหม่ + สองแถว" },
+          title: { en: "Chiang Mai Old City", zh: "清迈古城", th: "เมืองเก่าเชียงใหม่", ja: "チェンマイ旧市街" },
+          shortDesc: { en: "Ancient walls, temples & night bazaar.", zh: "古城墙、寺庙和夜市。", th: "กำแพงเมืองเก่า วัด และตลาดกลางคืน", ja: "古い城壁、寺院、ナイトバザール" },
+          detail: { en: "Fly to Chiang Mai from BKK. Songthaews (red trucks) are common. Visit Wat Phra Singh.", zh: "从曼谷飞清迈。红色双条车常见。推荐帕辛寺。", th: "บินจากกรุงเทพฯ รถสองแถวแดง วัดพระสิงห์", ja: "バンコクから飛行機でチェンマイへ。赤いソンテウが一般的。ワット・プラシンへ。" },
+          station: { en: "Chiang Mai Airport + city songthaew", zh: "清迈机场+双条车", th: "สนามบินเชียงใหม่ + สองแถว", ja: "チェンマイ空港 + 市内ソンテウ" },
           url: "https://www.tourismchiangmai.org/" },
         { id: 5, img: "https://picsum.photos/id/29/400/300",
-          title: { en: "Doi Suthep", zh: "素贴山双龙寺", th: "ดอยสุเทพ" },
-          shortDesc: { en: "Mountain temple with golden pagoda.", zh: "山顶金塔寺庙。", th: "วัดบนดอยที่มีเจดีย์ทองคำ" },
-          detail: { en: "From Chiang Mai, take songthaew from Pratu Chang Phuak. 306 steps or cable car.", zh: "从清迈古城乘坐双条车。306级台阶或缆车。", th: "จากเชียงใหม่นั่งสองแถว ขึ้นบันได 306 ขั้น" },
-          station: { en: "Songthaew from Chang Phuak Gate", zh: "昌卜克门乘双条车", th: "สองแถวจากประตูช้างเผือก" },
+          title: { en: "Doi Suthep", zh: "素贴山双龙寺", th: "ดอยสุเทพ", ja: "ドイ・ステプ" },
+          shortDesc: { en: "Mountain temple with golden pagoda.", zh: "山顶金塔寺庙。", th: "วัดบนดอยที่มีเจดีย์ทองคำ", ja: "黄金の仏塔がある山頂寺院" },
+          detail: { en: "From Chiang Mai, take songthaew from Pratu Chang Phuak. 306 steps or cable car.", zh: "从清迈古城乘坐双条车。306级台阶或缆车。", th: "จากเชียงใหม่นั่งสองแถว ขึ้นบันได 306 ขั้น", ja: "チェンマイからチャンプアック門発のソンテウ。306段の階段またはケーブルカー。" },
+          station: { en: "Songthaew from Chang Phuak Gate", zh: "昌卜克门乘双条车", th: "สองแถวจากประตูช้างเผือก", ja: "チャンプアック門からソンテウ" },
           url: "https://www.doisuthep.com/" },
         { id: 6, img: "https://picsum.photos/id/163/400/300",
-          title: { en: "Patong Beach, Phuket", zh: "普吉岛芭东海滩", th: "หาดป่าตอง ภูเก็ต" },
-          shortDesc: { en: "Lively beach with water sports & nightlife.", zh: "热闹海滩，水上活动和夜生活。", th: "ชายหาดคึกคัก กีฬาทางน้ำ กลางคืนสนุก" },
-          detail: { en: "Fly to Phuket, then taxi/minibus. Best for jet ski, banana boat.", zh: "飞往普吉岛后乘出租车。推荐摩托艇、香蕉船。", th: "นั่งเครื่องบินถึงภูเก็ต รถแท็กซี่ เจ็ทสกี เรือกล้วย" },
-          station: { en: "Phuket Airport + taxi (45 min)", zh: "普吉机场+出租车45分钟", th: "สนามบินภูเก็ต + แท็กซี่ 45 นาที" },
+          title: { en: "Patong Beach, Phuket", zh: "普吉岛芭东海滩", th: "หาดป่าตอง ภูเก็ต", ja: "パトンビーチ（プーケット）" },
+          shortDesc: { en: "Lively beach with water sports & nightlife.", zh: "热闹海滩，水上活动和夜生活。", th: "ชายหาดคึกคัก กีฬาทางน้ำ กลางคืนสนุก", ja: "ウォータースポーツとナイトライフが楽しめる賑やかなビーチ" },
+          detail: { en: "Fly to Phuket, then taxi/minibus. Best for jet ski, banana boat.", zh: "飞往普吉岛后乘出租车。推荐摩托艇、香蕉船。", th: "นั่งเครื่องบินถึงภูเก็ต รถแท็กซี่ เจ็ทสกี เรือกล้วย", ja: "プーケット空港からタクシーまたはミニバス。ジェットスキーやバナナボートに最適。" },
+          station: { en: "Phuket Airport + taxi (45 min)", zh: "普吉机场+出租车45分钟", th: "สนามบินภูเก็ต + แท็กซี่ 45 นาที", ja: "プーケット空港 + タクシーで45分" },
           url: "https://www.phuket.net/" },
         { id: 7, img: "https://picsum.photos/id/130/400/300",
-          title: { en: "Phi Phi Islands", zh: "皮皮岛", th: "หมู่เกาะพีพี" },
-          shortDesc: { en: "Crystal clear water, Maya Bay.", zh: "清澈海水，玛雅湾。", th: "น้ำใสมาก อ่าวมาหยา" },
-          detail: { en: "Speedboat tour from Phuket or Krabi. Snorkeling and scenic viewpoints.", zh: "从普吉或甲米坐快艇。浮潜和观景台。", th: "เรือสปีดโบ๊ทจากภูเก็ต ดำน้ำตื้น จุดชมวิว" },
-          station: { en: "Rassada Pier (Phuket) + speedboat", zh: "普吉Rassada码头+快艇", th: "ท่าเรือรัษฎา + สปีดโบ๊ท" },
-          url: "https://www.phiphi island.com/" },
+          title: { en: "Phi Phi Islands", zh: "皮皮岛", th: "หมู่เกาะพีพี", ja: "ピピ諸島" },
+          shortDesc: { en: "Crystal clear water, Maya Bay.", zh: "清澈海水，玛雅湾。", th: "น้ำใสมาก อ่าวมาหยา", ja: "透き通った海、マヤ湾" },
+          detail: { en: "Speedboat tour from Phuket or Krabi. Snorkeling and scenic viewpoints.", zh: "从普吉或甲米坐快艇。浮潜和观景台。", th: "เรือสปีดโบ๊ทจากภูเก็ต ดำน้ำตื้น จุดชมวิว", ja: "プーケットまたはクラビからスピードボートツアー。シュノーケリングと絶景ポイント。" },
+          station: { en: "Rassada Pier (Phuket) + speedboat", zh: "普吉Rassada码头+快艇", th: "ท่าเรือรัษฎา + สปีดโบ๊ท", ja: "ラッサダー埠頭（プーケット）+ スピードボート" },
+          url: "https://www.phiphiisland.com/" },
         { id: 8, img: "https://picsum.photos/id/94/400/300",
-          title: { en: "Phuket Old Town", zh: "普吉镇老街", th: "เมืองเก่าภูเก็ต" },
-          shortDesc: { en: "Sino-Portuguese architecture & cafes.", zh: "中葡风格建筑和咖啡店。", th: "สถาปัตยกรรมจีน-โปรตุเกส ร้านกาแฟ" },
-          detail: { en: "Walkable area, famous for Sunday Walking Street Market.", zh: "步行区，周日夜市著名。", th: "เดินเล่น ตลาดนัดวันอาทิตย์" },
-          station: { en: "Local bus or taxi from beaches", zh: "从海滩坐当地巴士或出租车", th: "รถประจำทางหรือแท็กซี่จากหาด" },
+          title: { en: "Phuket Old Town", zh: "普吉镇老街", th: "เมืองเก่าภูเก็ต", ja: "プーケット旧市街" },
+          shortDesc: { en: "Sino-Portuguese architecture & cafes.", zh: "中葡风格建筑和咖啡店。", th: "สถาปัตยกรรมจีน-โปรตุเกส ร้านกาแฟ", ja: "シノ・ポルトガル様式の建築とカフェ" },
+          detail: { en: "Walkable area, famous for Sunday Walking Street Market.", zh: "步行区，周日夜市著名。", th: "เดินเล่น ตลาดนัดวันอาทิตย์", ja: "徒歩エリア。日曜日の歩行者天国マーケットで有名。" },
+          station: { en: "Local bus or taxi from beaches", zh: "从海滩坐当地巴士或出租车", th: "รถประจำทางหรือแท็กซี่จากหาด", ja: "ビーチから地元バスまたはタクシー" },
           url: "https://oldtownphuket.com/" },
         { id: 9, img: "https://picsum.photos/id/42/400/300",
-          title: { en: "Damnoen Saduak Floating Market", zh: "丹嫩沙多水上市场", th: "ตลาดน้ำดำเนินสะดวก" },
-          shortDesc: { en: "Paddle boats selling fresh food.", zh: "划船售卖新鲜食物。", th: "เรือ paddles ขายอาหารสด" },
-          detail: { en: "Day trip from Bangkok (1.5h drive). Best early morning. Hire long-tail boat.", zh: "从曼谷出发1.5小时车程。建议清晨去。租长尾船。", th: "ทริปวันเดียวจากกรุงเทพฯ เวลาดีตอนเช้า เรือหางยาว" },
-          station: { en: "Minivan from Southern Bus Terminal", zh: "南部汽车站小巴", th: "รถตู้จากสถานีขนส่งสายใต้" },
+          title: { en: "Damnoen Saduak Floating Market", zh: "丹嫩沙多水上市场", th: "ตลาดน้ำดำเนินสะดวก", ja: "ダムヌン・サドアク水上マーケット" },
+          shortDesc: { en: "Paddle boats selling fresh food.", zh: "划船售卖新鲜食物。", th: "เรือ paddles ขายอาหารสด", ja: "新鮮な料理を売る手漕ぎボート" },
+          detail: { en: "Day trip from Bangkok (1.5h drive). Best early morning. Hire long-tail boat.", zh: "从曼谷出发1.5小时车程。建议清晨去。租长尾船。", th: "ทริปวันเดียวจากกรุงเทพฯ เวลาดีตอนเช้า เรือหางยาว", ja: "バンコクから日帰り（車で1.5時間）。早朝がベスト。長尾船をチャーター。" },
+          station: { en: "Minivan from Southern Bus Terminal", zh: "南部汽车站小巴", th: "รถตู้จากสถานีขนส่งสายใต้", ja: "南部バスターミナルからミニバン" },
           url: "https://www.damnoensaduak.com/" },
         { id: 10, img: "https://picsum.photos/id/39/400/300",
-          title: { en: "Khao Soi (Chiang Mai dish)", zh: "清迈咖喱面", th: "ข้าวซอยเชียงใหม่" },
-          shortDesc: { en: "Famous northern Thai curry noodle soup.", zh: "著名泰北咖喱面汤。", th: "แกงกะหรี่เส้นนoodles ภาคเหนือ" },
-          detail: { en: "Try at Khao Soi Khun Yai or many local shops. Best lunch spot.", zh: "可在Khao Soi Khun Yai餐厅品尝。", th: "ลองที่ข้าวซอยคุณยาย หรือร้านท้องถิ่น" },
-          station: { en: "Nimman area or Old City", zh: "宁曼路或古城区域", th: "ย่านนิมมาน หรือเมืองเก่า" },
+          title: { en: "Khao Soi (Chiang Mai dish)", zh: "清迈咖喱面", th: "ข้าวซอยเชียงใหม่", ja: "カオソーイ（チェンマイ料理）" },
+          shortDesc: { en: "Famous northern Thai curry noodle soup.", zh: "著名泰北咖喱面汤。", th: "แกงกะหรี่เส้นนoodles ภาคเหนือ", ja: "タイ北部の有名なカレー風味の麺料理" },
+          detail: { en: "Try at Khao Soi Khun Yai or many local shops. Best lunch spot.", zh: "可在Khao Soi Khun Yai餐厅品尝。", th: "ลองที่ข้าวซอยคุณยาย หรือร้านท้องถิ่น", ja: "カオソーイ・クンヤイまたは地元の多くの店で。ランチに最適。" },
+          station: { en: "Nimman area or Old City", zh: "宁曼路或古城区域", th: "ย่านนิมมาน หรือเมืองเก่า", ja: "ニマン地区または旧市街" },
           url: "https://www.chiangmaicitylife.com/" },
         { id: 11, img: "https://picsum.photos/id/431/400/300",
-          title: { en: "Chao Phraya River Cruise", zh: "湄南河游船", th: "ล่องเรือเจ้าพระยา" },
-          shortDesc: { en: "Dinner cruise with temple lights.", zh: "夜景晚餐船，看寺庙灯光。", th: "อาหารค่ำลอยน้ำ ชมวัด illuminated" },
-          detail: { en: "Pick from Saphan Taksin pier. Book evening cruise with Thai buffet.", zh: "Saphan Taksin码头登船。晚餐自助餐。", th: "ท่าสะพานตากสิน จองตอนเย็น buffet ไทย" },
-          station: { en: "BTS Saphan Taksin", zh: "BTS Saphan Taksin站", th: "BTS สะพานตากสิน" },
+          title: { en: "Chao Phraya River Cruise", zh: "湄南河游船", th: "ล่องเรือเจ้าพระยา", ja: "チャオプラヤ川クルーズ" },
+          shortDesc: { en: "Dinner cruise with temple lights.", zh: "夜景晚餐船，看寺庙灯光。", th: "อาหารค่ำลอยน้ำ ชมวัด illuminated", ja: "寺院のライトアップを楽しむディナークルーズ" },
+          detail: { en: "Pick from Saphan Taksin pier. Book evening cruise with Thai buffet.", zh: "Saphan Taksin码头登船。晚餐自助餐。", th: "ท่าสะพานตากสิน จองตอนเย็น buffet ไทย", ja: "サパーンタクシン桟橋から出発。タイ料理ビュッフェ付き夜のクルーズを予約。" },
+          station: { en: "BTS Saphan Taksin", zh: "BTS Saphan Taksin站", th: "BTS สะพานตากสิน", ja: "BTSサパーンタクシン駅" },
           url: "https://www.chaophrayacruise.com/" }
     ];
 
@@ -434,13 +430,9 @@
 
     function updateLanguage() {
         document.getElementById('page-title').innerText = translations[currentLang].title;
-        // スポンサーボタンのテキスト
         document.querySelectorAll('.sponsor-btn').forEach(btn => btn.innerText = translations[currentLang].sponsorBtn);
-        // カルーセル更新
         renderCarousel();
-        if (selectedPlace !== null) {
-            showDetail(selectedPlace);
-        }
+        if (selectedPlace !== null) showDetail(selectedPlace);
     }
 
     function renderCarousel() {
@@ -535,7 +527,6 @@
         };
     }
 
-    // テーマ切り替え
     function initTheme() {
         const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
         if (!localStorage.getItem('theme')) {
@@ -550,7 +541,6 @@
         };
     }
 
-    // 言語切り替え
     function initLang() {
         const btns = document.querySelectorAll('.lang-btn');
         btns.forEach(btn => {
@@ -563,17 +553,12 @@
         });
     }
 
-    // スポンサー枠コメント（後から変更できるように）
-    // 上部スポンサー: 画像ID sponsorTopImg, リンク sponsorTopLink
-    // 下部スポンサー: sponsorBottomImg, sponsorBottomLink
-    // ここでデフォルト画像・URL設定（後で書き換え可）
     document.addEventListener('DOMContentLoaded', () => {
-        // デモのスポンサー設定（ご自身の画像/URLに変更してください）
+        // スポンサーのデモ設定（後で変更可）
         document.getElementById('sponsorTopImg').src = "https://picsum.photos/id/10/120/60";
         document.getElementById('sponsorTopLink').href = "https://www.tourismthailand.org";
         document.getElementById('sponsorBottomImg').src = "https://picsum.photos/id/12/120/60";
         document.getElementById('sponsorBottomLink').href = "https://www.thailandfestival.com";
-        // カルーセル
         renderCarousel();
         initCarouselScroll();
         goToSlide(0);
@@ -581,8 +566,7 @@
         initLang();
         updateLanguage();
     });
-</script>
-<script>
+
     // サービスワーカー登録
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
